@@ -1,15 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MobileCategoryController;
 use App\Http\Controllers\MobileTourController;
 use App\Http\Controllers\MobileUserController;
-use App\Http\Controllers\TourController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,10 +32,3 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('auth-logout', [AuthController::class, 'authUserLogout']);
 });
-
-
-// Admin
-Route::resource('user', UserController::class)->except(['create', 'edit']);
-Route::resource('admin', AdminController::class)->except(['create', 'edit']);
-Route::resource('category', CategoryController::class)->except(['create', 'edit']);
-Route::resource('tour', TourController::class)->except(['create', 'edit']);

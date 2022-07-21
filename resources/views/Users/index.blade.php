@@ -1,53 +1,101 @@
-@extends('Layouts.mainlayout')
+@extends('Layouts.mainLayout')
 @section('content')
-
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Users List Data</h6>
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success m-3">
-                {{ $message }}
+<div class="wa-container">
+    @include('Layouts.sidebar')
+      <div class="wa-field">
+        @include('Layouts.top_navigation')
+        <div class="wa-field-container">
+          <div class="box">
+            <div class="box-head p-4 d-flex justify-content-between">
+              <h1>User List</h1>
+              <div class="group">
+                <button class="mx-1 btn wa-btn-danger"><i class='bx bx-trash'></i></button>
+                <button class="btn wa-btn-success mx-1"><i class='bx bx-check-square'></i></button>
+                <button class="btn wa-btn-primary mx-1"><i class='bx bx-user-plus'></i></button>
+              </div>
             </div>
-        @endif
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <div class="d-flex justify-content-between align-items-center">
-                <h3>Users Data</h3>
-                <a href="{{ env('APP_URL') }}/mynotes-users/create" class="btn btn-primary mb-3">Add+</a>
-            </div>
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <div class="box-body">
+              <table class="wa-table">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Action</th>
-                    </tr>
+                  <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                    <th>Check</th>
+                  </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->phone_number }}</td>
-                        <td>
-                            <a href="{{ env('APP_URL') }}/mynotes-users/{{ $user->id }}" class="btn btn-info">Show</a>
-                            <a href="{{ env('APP_URL') }}/mynotes-users/{{ $user->id }}/edit" class="btn btn-warning">Edit</a>
-                            <form action="{{ env('APP_URL') }}/mynotes-users/{{ $user->id }}" method="POST" class="d-inline-block">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                  <tr>
+                    <td>1</td>
+                    <td>img</td>
+                    <td>Akmal Keisin Alfateh</td>
+                    <td>081390049855</td>
+                    <td>Admin</td>
+                    <td>
+                      <button class="mx-1 btn wa-btn-primary"><i class='bx bx-show-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-warning"><i class='bx bx-edit-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-danger"><i class='bx bx-trash'></i></button>
+                    </td>
+                    <td>
+                      <input type="checkbox" value="" class="form-check-input d-block m-auto">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>img</td>
+                    <td>Akmal Keisin Alfateh</td>
+                    <td>081390049855</td>
+                    <td>Admin</td>
+                    <td>
+                      <button class="mx-1 btn wa-btn-primary"><i class='bx bx-show-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-warning"><i class='bx bx-edit-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-danger"><i class='bx bx-trash'></i></button>
+                    </td>
+                    <td>
+                      <input type="checkbox" value="" class="form-check-input d-block m-auto">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>img</td>
+                    <td>Akmal Keisin Alfateh</td>
+                    <td>081390049855</td>
+                    <td>Admin</td>
+                    <td>
+                      <button class="mx-1 btn wa-btn-primary"><i class='bx bx-show-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-warning"><i class='bx bx-edit-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-danger"><i class='bx bx-trash'></i></button>
+                    </td>
+                    <td>
+                      <input type="checkbox" value="" class="form-check-input d-block m-auto">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>img</td>
+                    <td>Akmal Keisin Alfateh</td>
+                    <td>081390049855</td>
+                    <td>Admin</td>
+                    <td>
+                      <button class="mx-1 btn wa-btn-primary"><i class='bx bx-show-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-warning"><i class='bx bx-edit-alt'></i></button>
+                      <button class="mx-1 btn wa-btn-danger"><i class='bx bx-trash'></i></button>
+                    </td>
+                    <td>
+                      <input type="checkbox" value="" class="form-check-input d-block m-auto">
+                    </td>
+                  </tr>
                 </tbody>
-            </table>
+              </table>
+            </div>
+          </div>
         </div>
+      </div>
+    <div class="test">
+
     </div>
-</div>
+    </div>
 @endsection

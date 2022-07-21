@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +32,9 @@ Route::middleware('guest-custom')->group(function () {
     Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
     Route::post('/auth/login', [AuthController::class, 'authLogin']);
 });
+
+// Admin
+Route::resource('user', UserController::class)->except(['create', 'edit']);
+Route::resource('admin', AdminController::class)->except(['create', 'edit']);
+Route::resource('category', CategoryController::class)->except(['create', 'edit']);
+Route::resource('tour', TourController::class)->except(['create', 'edit']);
