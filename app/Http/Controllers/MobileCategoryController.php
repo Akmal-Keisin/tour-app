@@ -38,10 +38,11 @@ class MobileCategoryController extends Controller
             ], 500);
         }
     }
-    public function show(Category $category)
+    public function show($id)
     {
+        $category = Category::find($id);
         try {
-            $data = Tour::with('categories')->where('category_id', $category->id);
+            $data = Tour::where('category_id', $category->id);
             if ($data) {
                 if (request('search')) {
                     $data->where('name', 'LIKE', '%' . request('search') . '%');
