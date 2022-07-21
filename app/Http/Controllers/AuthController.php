@@ -73,7 +73,7 @@ class AuthController extends Controller
                     'status' => 200,
                     'info' => 'Login Success',
                     'token' => $token->plainTextToken,
-                    'data' => 'success'
+                    'data' => Auth::user()
                 ], 200);
             }
             return response()->json([
