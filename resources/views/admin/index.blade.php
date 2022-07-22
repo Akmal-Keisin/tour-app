@@ -4,7 +4,7 @@
     <div id="app">
         <div class="box mx-4 my-3">
             <div class="box-head d-flex justify-content-between py-1">
-                <h1 class="text m-0 p-0">Users List</h1>
+                <h1 class="text m-0 p-0">Admins List</h1>
                 <div class="group">
                     <button class="btn btn-sm wa-btn-danger mx-1"><i class='bx bx-trash'></i></button>
                     <button class="btn btn-sm wa-btn-success mx-1"><i class='bx bx-check-square' ></i></button>
@@ -15,7 +15,10 @@
                     <thead>
                       <tr>
                         <th>No.</th>
+                        <th>Image</th>
                         <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
                         <th>Action</th>
                         <th>Check</th>
                       </tr>
@@ -23,7 +26,10 @@
                     <tbody>
                       <tr v-for="(item, index) in data">
                         <td>@{{ index + 1 }}</td>
+                        <td><img src="@{{ item.image }}" alt=""></td>
                         <td>@{{ item.name }}</td>
+                        <td>@{{ item.phone_number }}</td>
+                        <td>@{{ 'admin' }}</td>
                         <td>
                           <button class="mx-1 btn wa-btn-primary"><i class='bx bx-show-alt'></i></button>
                           <button class="mx-1 btn wa-btn-warning"><i class='bx bx-edit-alt'></i></button>
@@ -48,7 +54,7 @@
                 }
             },
             mounted() {
-                this.data = fetch('http://127.0.0.1:8000/api/category', {
+                this.data = fetch('http://127.0.0.1:8000/api/admin', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json'

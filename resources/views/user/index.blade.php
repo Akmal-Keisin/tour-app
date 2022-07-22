@@ -15,7 +15,10 @@
                     <thead>
                       <tr>
                         <th>No.</th>
+                        <th>Image</th>
                         <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
                         <th>Action</th>
                         <th>Check</th>
                       </tr>
@@ -23,7 +26,10 @@
                     <tbody>
                       <tr v-for="(item, index) in data">
                         <td>@{{ index + 1 }}</td>
+                        <td><img src="@{{ item.image }}" alt=""></td>
                         <td>@{{ item.name }}</td>
+                        <td>@{{ item.phone_number }}</td>
+                        <td>@{{ 'admin' }}</td>
                         <td>
                           <button class="mx-1 btn wa-btn-primary"><i class='bx bx-show-alt'></i></button>
                           <button class="mx-1 btn wa-btn-warning"><i class='bx bx-edit-alt'></i></button>
@@ -44,11 +50,11 @@
         createApp({
             data() {
                 return {
-                    data: []
+                    data: ''
                 }
             },
             mounted() {
-                this.data = fetch('http://127.0.0.1:8000/api/category', {
+                this.data = fetch('http://127.0.0.1:8000/api/user', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json'

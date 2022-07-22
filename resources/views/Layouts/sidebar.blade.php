@@ -1,40 +1,113 @@
-<div class="side-nav">
-    <div class="brand">
-        <router-link to="/admin" class="">
-        <img src="../assets/img/logo.png" class="d-block m-auto" alt="logo">
-        <h1 class="text-center mt-3">TRAVEL</h1>
-        </router-link>
-    </div>
-    <ul class="side-nav-body">
-        <li class="wa-list-item">
-        <i class='bx bx-user'></i>
-        <router-link class="ms-2" to="/user">User List</router-link>
-        </li>
-        <li class="wa-list-item">
-        <i class='bx bxs-map'></i>
-        <router-link class="ms-2" to="/tour">Tour List</router-link>
-        </li>
-        <li class="wa-list-item">
-        <i class='bx bx-spreadsheet' ></i>
-        <router-link class="ms-2" to="/category">Category List</router-link>
-        </li>
-        <li class="wa-list-item">
-        <i class='bx bxs-chip'></i>
-        <router-link class="ms-2" to="/admin">Admin List</router-link>
-        </li>
-    </ul>
-    <ul class="side-nav-footer">
-        <input class="checkbox" type="checkbox" name="" id="" />
-        <li class="wa-list-item">
-        <i class='bx bx-log-out'></i>
-        <a class="ms-2" href="#">Logout</a>
-        </li>
-        <li>
-        <div class="hamburger-lines">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
+
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="{{ asset('img/logo.png') }}" alt="">
+            </span>
+
+            <div class="text logo-text">
+                <span class="name">TRAVEL</span>
+                <span class="profession">Web developer</span>
             </div>
-        </li>
-    </ul>
-</div>
+        </div>
+
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+
+            <li class="search-box">
+                <i class='bx bx-search icon'></i>
+                <input type="text" placeholder="Search...">
+            </li>
+
+            <ul class="menu-links m-0 p-0">
+                <li class="nav-link {{ Request::is('admin*') ? 'link-active' : '' }}">
+                    <a href="{{ url('/admin') }}">
+                        <i class='bx bx-chip icon' ></i>
+                        <span class="text nav-text">Admins</span>
+                    </a>
+                </li>
+
+                <li class="nav-link {{ Request::is('user*') ? 'link-active' : '' }}">
+                    <a href="{{ url('/user') }}">
+                        <i class='bx bx-user icon'></i>
+                        <span class="text nav-text">Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-link {{ Request::is('tour*') ? 'link-active' : '' }}">
+                    <a href="{{ url('/tour') }}">
+                        <i class='bx bx-map icon'></i>
+                        <span class="text nav-text">Tours</span>
+                    </a>
+                </li>
+
+                <li class="nav-link {{ Request::is('category*') ? 'link-active' : '' }}">
+                    <a href="{{ url('/category') }}">
+                        <i class='bx bx-list-ul icon' ></i>
+                        <span class="text nav-text">Categories</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <li class="">
+                <a href="#">
+                    <i class='bx bx-log-out icon' ></i>
+                    <span class="text nav-text">Logout</span>
+                </a>
+            </li>
+
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark mode</span>
+
+                {{-- <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div> --}}
+            </li>
+
+        </div>
+    </div>
+</nav>
+
+<section class="home">
+    @yield('content')
+</section>
+
+<script>
+        const body = document.querySelector('body'),
+      sidebar = body.querySelector('nav'),
+      toggle = body.querySelector(".toggle"),
+      searchBtn = body.querySelector(".search-box"),
+      modeSwitch = body.querySelector(".toggle-switch"),
+      modeText = body.querySelector(".mode-text");
+
+
+    toggle.addEventListener("click" , () =>{
+        sidebar.classList.toggle("close");
+    })
+
+    searchBtn.addEventListener("click" , () =>{
+        sidebar.classList.remove("close");
+    })
+
+//     modeSwitch.addEventListener("click" , () =>{
+//         body.classList.toggle("dark");
+//
+//         if(body.classList.contains("dark")){
+//             modeText.innerText = "Light mode";
+//         }else{
+//             modeText.innerText = "Dark mode";
+//
+//         }
+//     });
+</script>
