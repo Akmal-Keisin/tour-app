@@ -21,6 +21,9 @@ Route::middleware('guest-custom')->group(function () {
     Route::post('/auth/login', [AuthController::class, 'authLogin']);
 });
 
+Route::get('/', function () {
+    return redirect('/admin');
+});
 
 Route::view('/admin', 'admin.index');
 Route::view('/user', 'user.index');

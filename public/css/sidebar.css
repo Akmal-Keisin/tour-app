@@ -382,3 +382,12 @@ body.dark .home .text{
     border: #4ff86b solid 1px;
     color: white;
   }
+
+  .modal table .key {
+    position: relative;
+  }
+  .modal table .key::before {
+    content: ":";
+    position: absolute;
+    right: 0;
+  }
