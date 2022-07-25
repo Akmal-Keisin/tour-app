@@ -10,33 +10,39 @@
                             <div class="modal fade" id="showAdd" tabindex="-1" aria-labelledby="#showModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title text m-0 p-0" id="showModalLabel">Add Admin</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row justify-content-between align-items-center">
-                                            <div class="mb-3">
-                                                <label for="image" class="form-label">Image :</label>
-                                                <input type="file" id="image" class="form-control">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name :</label>
-                                                <input type="text" id="name" class="form-control">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="phone_number" class="form-label">Phone Number :</label>
-                                                <input type="text" class="form-control" id="phone_number">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="password" class="form-label">Password :</label>
-                                                <input type="password" class="form-control" id="password">
+                                    <form action="" @submit.prevent="addData" id="addForm">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title text m-0 p-0" id="showModalLabel">Add Admin</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row justify-content-between align-items-center">
+                                                <div class="mb-3">
+                                                    <label for="image" class="form-label">Image :</label>
+                                                    <input type="file" name="image" id="image" class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Name :</label>
+                                                    <input type="text" name="name" id="name" class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phone_number" class="form-label">Phone Number :</label>
+                                                    <input type="text" name="phone_number" class="form-control" id="phone_number">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="password" class="form-label">Password :</label>
+                                                    <input type="password" name="password" class="form-control" id="password">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="password_confirm" class="form-label">Password Confirmation :</label>
+                                                    <input type="password" name="password_confirm" class="form-control" id="password_confirm">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Add Now!</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Add Now!</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </form>
                                     </div>
                                 </div>
                                 </div>
@@ -176,7 +182,7 @@
                         body: formData
 
                     }
-                    this.newData = fetch('http://127.0.0.1:8000/api/tour', requestOption)
+                    this.newData = fetch('http://127.0.0.1:8000/api/admin', requestOption)
                     .then(response => response.json())
                     .then((json) => {
                         this.data.push(json.data)

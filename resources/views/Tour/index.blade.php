@@ -6,7 +6,7 @@
             <div class="box-head d-flex justify-content-between py-1">
                 <h1 class="text m-0 p-0">Tour List</h1>
                 <div class="group">
-                    <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#showAdd"><i class='bx bx-user-plus'></i></button>
+                    <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#showAdd"><i class='bx bx-layer-plus'></i></button>
                             <div class="modal fade" id="showAdd" tabindex="-1" aria-labelledby="#showModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">

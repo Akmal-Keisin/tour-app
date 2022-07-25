@@ -7,26 +7,29 @@
                 <h1 class="text m-0 p-0">Category List</h1>
                 <div class="group">
 
-                    <button class="btn btn-sm btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#showEdit"><i class="bx bx-user-plus"></i></button>
-                            <div class="modal fade" id="showEdit" tabindex="-1" aria-labelledby="#showModalLabel" aria-hidden="true">
+                    <button class="btn btn-sm btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#showAdd"><i class='bx bx-list-plus'></i></button>
+                            <div class="modal fade" id="showAdd" tabindex="-1" aria-labelledby="#showModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title text m-0 p-0" id="showModalLabel">Add Category</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row justify-content-between align-items-center">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name :</label>
-                                                <input type="text" id="name" class="form-control">
+                                    <form action="" @submit.prevent="addData" id="addForm">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title text m-0 p-0" id="showModalLabel">Add Category</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row justify-content-between align-items-center">
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Name :</label>
+                                                    <input type="text" name="name" id="name" class="form-control">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save Changes</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
+                                        <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Add Now!</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+
                                 </div>
                                 </div>
                             </div>
@@ -124,7 +127,7 @@
                         body: formData
 
                     }
-                    this.newData = fetch('http://127.0.0.1:8000/api/tour', requestOption)
+                    this.newData = fetch('http://127.0.0.1:8000/api/category', requestOption)
                     .then(response => response.json())
                     .then((json) => {
                         this.data.push(json.data)
