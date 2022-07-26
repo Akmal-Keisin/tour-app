@@ -100,7 +100,7 @@
                         <td>@{{ index + 1 }}</td>
                         <td>@{{ item.name }}</td>
                         <td>@{{ item.category_id }}</td>
-                        <td>@{{ item.information }}</td>
+                        <td>@{{ (item.information.length > 15) ? item.information.substr(0,15) + '...' : item.information }}</td>
                         <td>@{{ (item.address.length > 15) ? item.address.substr(0,15) + '...' : item.address }}</td>
                         <td>@{{ (item.latitude.length > 15) ? item.latitude.substr(0,15) + '...' : item.latitude }}</td>
                         <td>@{{ (item.longitude.length > 15) ? item.longitude.substr(0,15) + '...' : item.longitude }}</td>
