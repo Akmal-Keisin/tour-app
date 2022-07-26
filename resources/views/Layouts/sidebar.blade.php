@@ -8,7 +8,7 @@
 
             <div class="text logo-text">
                 <span class="name">TRAVEL</span>
-                <span class="profession">Web developer</span>
+                <span class="profession">Dashboard</span>
             </div>
         </div>
 

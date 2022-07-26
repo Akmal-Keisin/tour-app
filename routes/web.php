@@ -16,15 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Auth
-Route::middleware('guest-custom')->group(function () {
-    Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/auth/login', [AuthController::class, 'authLogin']);
-});
+// Route::middleware('guest-custom')->group(function () {
+//     Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+//     Route::post('/auth/login', [AuthController::class, 'authLogin']);
+// });
+
+
 
 Route::get('/', function () {
     return redirect('/admin');
 });
-
+Route::view('/auth/login', 'login');
 Route::view('/admin', 'admin.index');
 Route::view('/user', 'user.index');
 Route::view('/category', 'category.index');

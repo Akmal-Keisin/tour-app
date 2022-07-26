@@ -74,22 +74,24 @@
                             <div class="modal fade" id="showEdit" tabindex="-1" aria-labelledby="#showModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title text m-0 p-0" id="showModalLabel">Category Edit</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row justify-content-between align-items-center">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name :</label>
-                                                <input type="text" id="name" class="form-control" :value="item.name">
+                                    <form action="" id="editForm" @submit.prevent="editData">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text m-0 p-0" id="showModalLabel">Category Edit</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row justify-content-between align-items-center">
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Name :</label>
+                                                    <input type="text" name="name" id="name" class="form-control" :value="item.name">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-warning">Save Changes</button>
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-warning">Save Changes</button>
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 </div>
                             </div>
@@ -137,6 +139,10 @@
                     var modal = bootstrap.Modal.getInstance(myModalEl)
                     modal.hide();
                     alert('Data Berhasil Ditambahkan')
+                },
+                editData() {
+                    let formData = new FormData(editForm)
+                    console.log(formData)
                 }
             },
             mounted() {

@@ -213,7 +213,7 @@ class AdminController extends Controller
                 ], 200);
             }
             return response()->json([
-                'status' => 200,
+                'status' => 400,
                 'info' => 'Data Not Found'
             ], 200);
         } catch (Exception $e) {
