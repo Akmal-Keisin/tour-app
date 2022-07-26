@@ -256,7 +256,7 @@
                     }
 
                     // create new data
-                    this.newData = fetch('http://127.0.0.1:8000/api/tour', requestOption)
+                    this.newData = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/tour', requestOption)
                     .then((response) => {
                         return response.json()
                     })
@@ -288,7 +288,7 @@
                         headers: myHeaders,
                         body: formData
                     }
-                    this.newData = fetch(`http://127.0.0.1:8000/api/tour/${itemData.id}`, requestOption)
+                    this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/tour/${itemData.id}`, requestOption)
                     .then((response) => {
                         // convert response
                         return response.json()
@@ -331,7 +331,7 @@
                             headers: myHeaders,
                             body: formData
                         }
-                        this.newData = fetch(`http://127.0.0.1:8000/api/tour/${itemData.id}`, requestOption)
+                        this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/tour/${itemData.id}`, requestOption)
                         .then((response) => {
                             // convert response
                             return response.json()
@@ -356,7 +356,7 @@
                 }
             },
             mounted() {
-                this.data = fetch('http://127.0.0.1:8000/api/tour', {
+                this.data = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/tour', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json'
@@ -372,7 +372,7 @@
                     console.log('Error', error)
                 })
 
-                this.categories = fetch('http://127.0.0.1:8000/api/category', {
+                this.categories = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/category', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json'

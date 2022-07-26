@@ -145,7 +145,7 @@
                     }
 
                     // create new data
-                    this.newData = fetch('http://127.0.0.1:8000/api/category', requestOption)
+                    this.newData = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/category', requestOption)
                     .then((response) => {
                         return response.json()
                     })
@@ -177,7 +177,7 @@
                         headers: myHeaders,
                         body: formData
                     }
-                    this.newData = fetch(`http://127.0.0.1:8000/api/category/${itemData.id}`, requestOption)
+                    this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/category/${itemData.id}`, requestOption)
                     .then((response) => {
                         // convert response
                         return response.json()
@@ -220,7 +220,7 @@
                             headers: myHeaders,
                             body: formData
                         }
-                        this.newData = fetch(`http://127.0.0.1:8000/api/category/${itemData.id}`, requestOption)
+                        this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/category/${itemData.id}`, requestOption)
                         .then((response) => {
                             // convert response
                             return response.json()
@@ -245,7 +245,7 @@
                 }
             },
             mounted() {
-                this.data = fetch('http://127.0.0.1:8000/api/category', {
+                this.data = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/category', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json'
