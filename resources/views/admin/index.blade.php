@@ -275,6 +275,7 @@
 
                     })
                     .catch((err) => {
+                        alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                         console.log(err)
                     })
                 },
@@ -304,13 +305,11 @@
                             alert('Data Berhasil Dihapus')
                         })
                         .catch((err) => {
+                            alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                             console.log(err)
                         })
                         return
                     }
-                },
-                clearValidationMsg() {
-                    this.validationMsg = {}
                 }
             },
             mounted() {
@@ -325,6 +324,7 @@
                     this.data = json.data
                 })
                 .catch((error) => {
+                    alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                     console.log('Error', error)
                 })
             }
