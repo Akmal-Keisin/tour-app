@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Favourite;
 use App\Models\Tour;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -46,6 +47,10 @@ class MobileCategoryController extends Controller
             if ($data) {
                 if (request('search')) {
                     $data->where('name', 'LIKE', '%' . request('search') . '%');
+                }
+                foreach ($data as $item) {
+                    $likes = Favourite::where('user_id', auth()->user()->id)->where('tour_id', $item->id)->first();
+                    $item['like'] = ($likes) ? true : false;
                 }
                 return response()->json([
                     'status' => 200,
