@@ -22,7 +22,7 @@ class FavouriteController extends Controller
             $favourite->delete();
         }
         // dd($favourite);
-        $tour = Tour::find($request->tour_id);
+        $tour = Tour::find($request->tour_id)->get();
         $tour['like'] = ($favourite) ? false : true;
         return response()->json([
             'status' => 200,
