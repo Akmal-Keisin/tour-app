@@ -136,7 +136,7 @@
                                             <div class="row justify-content-between align-items-center">
                                                 <div class="mb-3">
                                                     <label for="image" class="form-label">Image :</label>
-                                                    <input type="file" id="image" class="form-control">
+                                                    <input type="file" id="image" name="image" class="form-control">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">Name :</label>
