@@ -43,7 +43,7 @@ class MobileCategoryController extends Controller
     {
         $category = Category::find($id);
         try {
-            $data = Tour::where('category_id', $category->id);
+            $data = Tour::where('category_id', $category->id)->get();
             if ($data) {
                 if (request('search')) {
                     $data->where('name', 'LIKE', '%' . request('search') . '%');
@@ -55,7 +55,7 @@ class MobileCategoryController extends Controller
                 return response()->json([
                     'status' => 200,
                     'info' => 'Data Obtained Successfully',
-                    'data' => (request('paginate')) ? $data->simplePaginate(request('paginate')) : $data->get()
+                    'data' => (request('paginate')) ? $data->simplePaginate(request('paginate')) : $data
                 ], 200);
             }
             return response()->json([
