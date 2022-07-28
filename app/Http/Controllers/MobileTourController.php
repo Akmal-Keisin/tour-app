@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favourite;
 use App\Models\Tour;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -22,6 +23,11 @@ class MobileTourController extends Controller
             } else {
                 $tours = Tour::all();
             }
+            foreach ($tours as $tour) {
+                $likes = Favourite::where('user_id', auth()->user()->id)->where('tour_id', $tour->id)->first();
+                $tour['like'] = ($likes) ? true : false;
+            }
+
             return response()->json([
                 'status' => 200,
                 'info' => 'Data Obtained Successfully',

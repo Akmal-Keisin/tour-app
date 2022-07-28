@@ -7,6 +7,7 @@ use App\Http\Controllers\MobileUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\TourController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,20 +25,22 @@ use Illuminate\Support\Facades\Route;
 Route::post('auth-login', [AuthController::class, 'authUserLogin']);
 Route::post('auth-admin', [AuthController::class, 'authAdminLogin']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('tour-list', [MobileTourController::class, 'index']);
-    Route::get('tour-detail/{id}', [MobileTourController::class, 'show']);
-    Route::get('tour-img-slider', [MobileTourController::class, 'imgSlider']);
+// Route::middleware('auth:sanctum')->group(function () {
+Route::get('tour-list', [MobileTourController::class, 'index']);
+Route::get('tour-detail/{id}', [MobileTourController::class, 'show']);
+Route::get('tour-img-slider', [MobileTourController::class, 'imgSlider']);
 
-    Route::get('category-list', [MobileCategoryController::class, 'index']);
-    Route::get('category-detail/{id}', [MobileCategoryController::class, 'show']);
+Route::get('category-list', [MobileCategoryController::class, 'index']);
+Route::get('category-detail/{id}', [MobileCategoryController::class, 'show']);
 
-    Route::get('user-profile', [MobileUserController::class, 'show']);
-    Route::put('user-edit', [MobileUserController::class, 'update']);
+Route::get('user-profile', [MobileUserController::class, 'show']);
+Route::put('user-edit', [MobileUserController::class, 'update']);
 
-    Route::post('auth-logout', [AuthController::class, 'authUserLogout']);
-});
 
+Route::post('auth-logout', [AuthController::class, 'authUserLogout']);
+// });
+
+Route::post('add-favourite', [FavouriteController::class, 'add']);
 Route::group(['middleware' => 'admin'], function () {
     // Admin
     Route::resource('user', UserController::class)->except(['create', 'edit']);
