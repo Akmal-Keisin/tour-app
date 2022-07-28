@@ -35,12 +35,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('user-profile', [MobileUserController::class, 'show']);
     Route::put('user-edit', [MobileUserController::class, 'update']);
+    Route::post('add-favourite', [FavouriteController::class, 'add']);
 
 
     Route::post('auth-logout', [AuthController::class, 'authUserLogout']);
 });
 
-Route::post('add-favourite', [FavouriteController::class, 'add']);
 Route::group(['middleware' => 'admin'], function () {
     // Admin
     Route::resource('user', UserController::class)->except(['create', 'edit']);
