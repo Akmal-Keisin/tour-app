@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,22 +14,24 @@ class AuthController extends Controller
     public function authAdminLogin(Request $request)
     {
         $credentials = Validator::make($request->all(), [
-            'phone_number' => 'required|numeric|max:255',
+            'phone_number' => 'required|numeric',
             'password' => 'required'
         ]);
 
         if ($credentials->fails()) {
             return response()->json([
                 'status' => '400',
-                'info' => 'Login Failed',
+                'info' => 'Validation Error',
                 'data' => $credentials->errors()
             ], 400);
         }
 
         try {
             if (Auth::attempt(['phone_number' => $request->phone_number, 'password' => $request->password, 'role_id' => 1])) {
+                $token = $request->user()->createToken('admin_token');
                 return response()->json([
                     'status' => 200,
+                    'token' => Hash::make('Coda24asdf091slC@!#LdaAx'),
                     'info' => 'Login Success',
                     'data' => 'success'
                 ], 200);
@@ -49,6 +52,7 @@ class AuthController extends Controller
 
     public function authAdminLogout()
     {
+        return response()->json(['tset' => 'test']);
     }
 
     public function authUserLogin(Request $request)

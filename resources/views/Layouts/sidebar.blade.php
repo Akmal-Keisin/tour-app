@@ -1,4 +1,3 @@
-
 <nav class="sidebar">
     <header>
         <div class="image-text">
@@ -55,15 +54,17 @@
             </ul>
         </div>
 
-        <div class="bottom-content">
-            <li class="">
-                <a href="#">
-                    <i class='bx bx-log-out icon' ></i>
-                    <span class="text nav-text">Logout</span>
-                </a>
+        <div class="bottom-content" id="logoutApp">
+            <li class="nav-link">
+                <form @submit.prevent="logout" class="d-block w-100 h-100" id="logoutForm">
+                    <button type="submit" class=" border-0">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Logout</span>
+                    </button>
+                </form>
             </li>
 
-            <li class="mode">
+            {{-- <li class="mode">
                 <div class="sun-moon">
                     <i class='bx bx-moon icon moon'></i>
                     <i class='bx bx-sun icon sun'></i>
@@ -73,8 +74,7 @@
                 {{-- <div class="toggle-switch">
                     <span class="switch"></span>
                 </div> --}}
-            </li>
-
+            {{-- </li> --}}
         </div>
     </div>
 </nav>
@@ -84,12 +84,49 @@
 </section>
 
 <script>
-        const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle"),
-      searchBtn = body.querySelector(".search-box"),
-      modeSwitch = body.querySelector(".toggle-switch"),
-      modeText = body.querySelector(".mode-text");
+    createApp({
+            data() {
+                return {
+                }
+            },
+            methods: {
+                logout() {
+                    // create header
+                    var myHeaders = new Headers();
+                    myHeaders.append("Accept", "application/json");
+                    myHeaders.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
+                    // create request
+                    let requestOption = {
+                        method: 'POST',
+                        headers: myHeaders,
+
+                    }
+
+                    // create new data
+                    this.newData = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/auth-logout-admin', requestOption)
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((json) => {
+                    if (json.status == 401) {
+                        alert('Anda tidak terautentikasi')
+                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                    }
+                    localStorage.removeItem('token')
+                    window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                    return alert('Anda berhasil logout')
+                    })
+                }
+            }
+        }).mount('#logoutApp')
+
+
+    const body = document.querySelector('body'),
+    sidebar = body.querySelector('nav'),
+    toggle = body.querySelector(".toggle"),
+    searchBtn = body.querySelector(".search-box"),
+    modeSwitch = body.querySelector(".toggle-switch"),
+    modeText = body.querySelector(".mode-text");
 
 
     toggle.addEventListener("click" , () =>{

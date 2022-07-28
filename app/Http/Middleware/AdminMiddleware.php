@@ -2,11 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Laravel\Sanctum\PersonalAccessToken;
 
-class AuthCustom
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,9 +20,12 @@ class AuthCustom
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::get('auth') === null) {
-            return redirect('/auth/login');
+        if (Hash::check('Coda24asdf091slC@!#LdaAx', $request->bearerToken())) {
+            return $next($request);
         }
-        return $next($request);
+        return response()->json([
+            'status' => 401,
+            'info' => 'Anda Tidak Terautentikasi'
+        ], 401);
     }
 }

@@ -21,16 +21,8 @@
   .box-body {
     padding: 2rem 4rem;
   }
-  .box-body form input {
-    border-radius: 3rem;
-  }
-  .box-body form label {
-    margin-left: 1rem;
-  }
   .box-head img {
     width: 10rem;
     margin: auto;
     display: block;
-  }
-  .login-box form {
   }

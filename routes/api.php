@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 // User
 Route::post('auth-login', [AuthController::class, 'authUserLogin']);
+Route::post('auth-admin', [AuthController::class, 'authAdminLogin']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('tour-list', [MobileTourController::class, 'index']);
@@ -37,9 +38,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('auth-logout', [AuthController::class, 'authUserLogout']);
 });
 
-
-// Admin
-Route::resource('user', UserController::class)->except(['create', 'edit']);
-Route::resource('admin', AdminController::class)->except(['create', 'edit']);
-Route::resource('category', CategoryController::class)->except(['create', 'edit']);
-Route::resource('tour', TourController::class)->except(['create', 'edit']);
+Route::group(['middleware' => 'admin'], function () {
+    // Admin
+    Route::resource('user', UserController::class)->except(['create', 'edit']);
+    Route::resource('admin', AdminController::class)->except(['create', 'edit']);
+    Route::resource('category', CategoryController::class)->except(['create', 'edit']);
+    Route::resource('tour', TourController::class)->except(['create', 'edit']);
+    Route::post('auth-admin-logout', [AuthController::class, 'authAdminLoout']);
+});

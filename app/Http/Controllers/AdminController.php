@@ -142,7 +142,6 @@ class AdminController extends Controller
             'name' => 'required|max:255',
             'phone_number' => ['required', 'numeric', Rule::unique('users')->ignore($id)],
             'password' => 'nullable',
-            'password_confirm' => 'nullable|same:password',
             'image' => 'nullable|image'
         ]);
         if ($validatedData->fails()) {

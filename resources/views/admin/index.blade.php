@@ -154,7 +154,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="password" class="form-label">Password :</label>
-                                                    <input type="password" class="form-control" id="password" :value="detailData.password">
+                                                    <input type="password" name="password" class="form-control" id="password" :value="detailData.password">
                                                     <div v-if="validationMsg.password" class="text-danger mt-2">
                                                         @{{ validationMsg.password[0] }}
                                                     </div>
@@ -206,6 +206,7 @@
                     // create header
                     var myHeaders = new Headers();
                     myHeaders.append("Accept", "application/json");
+                    myHeaders.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
                     // create request
                     let requestOption = {
@@ -221,6 +222,10 @@
                         return response.json()
                     })
                     .then((json) => {
+                    if (json.status == 401) {
+                        alert('Anda tidak terautentikasi')
+                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                    }
                     if (json.info == "Validation Error") {
                         // send validation data
                         this.validationMsg = json.data
@@ -241,6 +246,7 @@
                     // let formData = new FormData(editForm)
                     var myHeaders = new Headers();
                     myHeaders.append("Accept", "application/json");
+                    myHeaders.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
 
                     let requestOption = {
@@ -254,6 +260,10 @@
                         return response.json()
                     })
                     .then((json) => {
+                        if (json.status == 401) {
+                            alert('Anda tidak terautentikasi')
+                            window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                        }
                         if (json.info == "Validation Error") {
                             // send validation data
                             this.validationMsg = json.data
@@ -285,6 +295,8 @@
                         let formData = new FormData(document.getElementById('deleteForm'))
                         var myHeaders = new Headers();
                         myHeaders.append("Accept", "application/json");
+                        myHeaders.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
+
 
                         let requestOption = {
                             method: 'POST',
@@ -297,6 +309,10 @@
                             return response.json()
                         })
                         .then((json) => {
+                            if (json.status == 401) {
+                                alert('Anda tidak terautentikasi')
+                                window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                            }
                             if (json.info == "Data Not Found") {
                                 // send validation data
                                 return alert('Data Not Found')
@@ -312,15 +328,22 @@
                     }
                 }
             },
-            mounted() {
+            beforeMount() {
                 this.data = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/admin', {
                     method: 'get',
                     headers: {
-                        'Content-Type': 'Application/json'
+                        'Content-Type': 'Application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 })
-                .then(response => response.json())
+                .then((response) => {
+                    return response.json()
+                })
                 .then((json) => {
+                    if (json.status == 401) {
+                        alert('Anda tidak terautentikasi')
+                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                    }
                     this.data = json.data
                 })
                 .catch((error) => {

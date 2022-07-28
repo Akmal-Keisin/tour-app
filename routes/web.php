@@ -26,8 +26,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/admin');
 });
-Route::view('/auth/login', 'login');
+
+// Route::middleware('admin')->group(function () {
 Route::view('/admin', 'admin.index');
 Route::view('/user', 'user.index');
 Route::view('/category', 'category.index');
 Route::view('/tour', 'tour.index');
+// });
+
+Route::view('/auth/login', 'login');
