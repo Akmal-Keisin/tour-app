@@ -271,6 +271,7 @@
                 })
                 .then((json) => {
                     if (json.status == 401) {
+                        alert('Anda tidak terautentikasi')
                         window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
                     }
                     this.data = json.data

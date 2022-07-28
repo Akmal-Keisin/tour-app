@@ -383,11 +383,13 @@
                 })
                 .then((json) => {
                     if (json.status == 401) {
+                        alert('Anda tidak terautentikasi')
                         window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
                     }
                     this.data = json.data
                 })
                 .catch((error) => {
+                    alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                     console.log('Error', error)
                 })
 
