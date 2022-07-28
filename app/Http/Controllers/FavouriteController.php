@@ -22,12 +22,18 @@ class FavouriteController extends Controller
             $favourite->delete();
         }
         // dd($favourite);
-        $tour = Tour::find($request->tour_id)->get();
-        $tour['like'] = ($favourite) ? false : true;
+        $tour = Tour::find($request->tour_id);
+        if ($tour) {
+            $tour['like'] = ($favourite) ? false : true;
+            return response()->json([
+                'status' => 200,
+                'info' => ($favourite) ? 'Dislike Success' : 'Like Success',
+                'data' => $tour
+            ], 200);
+        }
         return response()->json([
-            'status' => 200,
-            'info' => ($favourite) ? 'Dislike Success' : 'Like Success',
-            'data' => $tour
-        ], 200);
+            'status' => 400,
+            'info' => "Data not found",
+        ], 400);
     }
 }
