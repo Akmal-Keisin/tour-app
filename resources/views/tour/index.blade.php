@@ -216,7 +216,7 @@
                             </form>
                         </td>
                         <td >
-                          <input type="checkbox" :value="item.id" class="form-check-input" name="id[]" :checked="checkAll" form="bulkDelteForm">
+                          <input type="checkbox" :value="item.id" class="form-check-input" name="id[]" :checked="checkAll" form="bulkDeleteForm">
                         </td>
                       </tr>
                     </tbody>
