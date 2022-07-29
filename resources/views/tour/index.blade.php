@@ -411,7 +411,7 @@
                                 // send validation data
                                 return alert('Data Not Found')
                             }
-                            const filterId = formData.get(id)
+                            const filterId = formData.get('id')
                             this.data = this.data.filter((item) => !filterId.includes(item.id))
                             alert('Data Berhasil Dihapus')
                         })
