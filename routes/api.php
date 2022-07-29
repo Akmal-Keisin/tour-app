@@ -53,7 +53,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('bulk-admin', [BulkController::class, 'admin']);
     Route::post('bulk-user', [BulkController::class, 'user']);
     Route::post('bulk-category', [BulkController::class, 'category']);
-    Route::post('bulk-tour', [BulkController::class, 'tour']);
+    Route::post('bulk-tour/delete', [BulkController::class, 'tour']);
 
     Route::post('auth-admin-logout', [AuthController::class, 'authAdminLoout']);
 });

@@ -8,6 +8,7 @@ use App\Models\Favourite;
 use App\Models\Tour;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BulkController extends Controller
 {
@@ -68,6 +69,12 @@ class BulkController extends Controller
             if ($likes) {
                 $likes->delete();
             }
+            foreach ($tours as $tour) {
+                if ($tour->image !== null) {
+                    $image = explode('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/', $tour->image);
+                    Storage::delete($image);
+                }
+            }
             $tours->delete();
             return response()->json([
                 'status' => 200,
@@ -76,7 +83,7 @@ class BulkController extends Controller
         }
         return response()->json([
             'status' => 400,
-            'info' => 'Data Not Found'
+            'info' => 'Success'
         ], 400);
     }
 }

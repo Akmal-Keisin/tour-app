@@ -76,8 +76,10 @@
                                 </div>
                                 </div>
                             </div>
-                    <button class="btn btn-sm btn-danger mx-1"><i class='bx bx-trash'></i></button>
-                    <button class="btn btn-sm btn-success mx-1"><i class='bx bx-check-square' ></i></button>
+                    <form action="" id="bulkDeleteForm" class="d-inline-block" method="POST" @submit.prevent="bulkDelete">
+                        <button class="btn btn-sm btn-danger mx-1"><i class='bx bx-trash'></i></button>
+                    </form>
+                    <button class="btn btn-sm btn-success mx-1" @click="checkAllSwitch"><i class='bx bx-check-square' ></i></button>
                 </div>
             </div>
             <div class="box-body">
@@ -99,7 +101,7 @@
                       <tr v-for="(item, index) in data">
                         <td>@{{ index + 1 }}</td>
                         <td>@{{ item.name }}</td>
-                        <td>@{{ item.category_id }}</td>
+                        <td>@{{ getCategory(item.category_id) }}</td>
                         <td>@{{ (item.information.length > 15) ? item.information.substr(0,15) + '...' : item.information }}</td>
                         <td>@{{ (item.address.length > 15) ? item.address.substr(0,15) + '...' : item.address }}</td>
                         <td>@{{ (item.latitude.length > 15) ? item.latitude.substr(0,15) + '...' : item.latitude }}</td>
@@ -127,7 +129,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="pe-3 key">Category</td>
-                                                            <td class="ps-3">@{{ detailData.category_id }}</td>
+                                                            <td class="ps-3">@{{ detailData.category }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="pe-3 key">Information</td>
@@ -214,7 +216,7 @@
                             </form>
                         </td>
                         <td >
-                          <input type="checkbox" value="" class="form-check-input">
+                          <input type="checkbox" :value="item.id" class="form-check-input" name="id[]" :checked="checkAll" form="bulkDelteForm">
                         </td>
                       </tr>
                     </tbody>
@@ -231,13 +233,28 @@
                     data: [],
                     categories: [],
                     detailData: {},
-                    validationMsg: {}
+                    validationMsg: {},
+                    checkAll: false
                 }
             },
             methods: {
+                checkAllSwitch() {
+                    if(this.checkAll == true) {
+                        this.checkAll = false
+                    } else {
+                        this.checkAll = true
+                    }
+                },
+                getCategory(id) {
+                    const category = this.categories.findIndex(item => item.id == id)
+                    return this.categories[category].name
+                },
                 showDetail(id) {
                     const index = this.data.findIndex(item => item.id == id)
                     this.detailData = this.data[index]
+
+                    const categoryData = this.categories.findIndex(item => item.id == this.detailData.category_id)
+                    this.detailData.category = this.categories[categoryData].name
                 },
                 addData() {
                     // save form data to variable
@@ -357,6 +374,45 @@
                                 return alert('Data Not Found')
                             }
                             this.data = this.data.filter((t) => t !== itemData)
+                            alert('Data Berhasil Dihapus')
+                        })
+                        .catch((err) => {
+                            alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
+                            console.log(err)
+                        })
+                        return
+                    }
+                },
+                bulkDelete() {
+                    let check = confirm('Are You Sure?')
+                    if (check) {
+                        let formData = new FormData(document.getElementById('bulkDeleteForm'))
+                        var myHeaders = new Headers();
+                        myHeaders.append("Accept", "application/json");
+                        myHeaders.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
+
+                        let requestOption = {
+                            method: 'POST',
+                            headers: myHeaders,
+                            body: formData
+                        }
+                        console.log('success')
+                        this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/bulk-tour/delete`, requestOption)
+                        .then((response) => {
+                            // convert response
+                            return response.json()
+                        })
+                        .then((json) => {
+                            if (json.status == 401) {
+                                alert('Anda tidak terautentikasi')
+                                window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                            }
+                            if (json.info == "Data Not Found") {
+                                // send validation data
+                                return alert('Data Not Found')
+                            }
+                            const filterId = formData.get(id)
+                            this.data = this.data.filter((item) => !filterId.includes(item.id))
                             alert('Data Berhasil Dihapus')
                         })
                         .catch((err) => {

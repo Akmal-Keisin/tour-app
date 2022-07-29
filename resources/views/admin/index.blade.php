@@ -344,6 +344,7 @@
                         alert('Anda tidak terautentikasi')
                         window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
                     }
+                    console.log(json)
                     this.data = json.data
                 })
                 .catch((error) => {

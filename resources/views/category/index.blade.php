@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                     <button class="btn btn-sm btn-danger mx-1"><i class='bx bx-trash' ></i></button>
-                    <button class="btn btn-sm btn-success mx-1"><i class='bx bx-check-square' ></i></button>
+                    <button class="btn btn-sm btn-success mx-1" ><i class='bx bx-check-square' ></i></button>
                 </div>
             </div>
             <div class="box-body">

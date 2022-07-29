@@ -216,14 +216,14 @@
                     }
 
                     // create new data
-                    this.newData = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/user', requestOption)
+                    this.newData = fetch('http://127.0.0.1:8000/api/user', requestOption)
                     .then((response) => {
                         return response.json()
                     })
                     .then((json) => {
                     if (json.status == 401) {
                         alert('Anda tidak terautentikasi')
-                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                        window.location = 'http://127.0.0.1:8000/auth/login'
                     }
                     if (json.info == "Validation Error") {
                         // send validation data
@@ -253,7 +253,7 @@
                         headers: myHeaders,
                         body: formData
                     }
-                    this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/user/${itemData.id}`, requestOption)
+                    this.newData = fetch(`http://127.0.0.1:8000/api/user/${itemData.id}`, requestOption)
                     .then((response) => {
                         // convert response
                         return response.json()
@@ -261,7 +261,7 @@
                     .then((json) => {
                         if (json.status == 401) {
                             alert('Anda tidak terautentikasi')
-                            window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                            window.location = 'http://127.0.0.1:8000/auth/login'
                         }
                         if (json.info == "Validation Error") {
                             // send validation data
@@ -301,7 +301,7 @@
                             headers: myHeaders,
                             body: formData
                         }
-                        this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/user/${itemData.id}`, requestOption)
+                        this.newData = fetch(`http://127.0.0.1:8000/api/user/${itemData.id}`, requestOption)
                         .then((response) => {
                             // convert response
                             return response.json()
@@ -309,7 +309,7 @@
                         .then((json) => {
                             if (json.status == 401) {
                                 alert('Anda tidak terautentikasi')
-                                window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                                window.location = 'http://127.0.0.1:8000/auth/login'
                             }
                             if (json.info == "Data Not Found") {
                                 // send validation data
@@ -327,7 +327,7 @@
                 }
             },
             beforeMount() {
-                this.data = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/user', {
+                this.data = fetch('http://127.0.0.1:8000/api/user', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json',
@@ -340,7 +340,7 @@
                 .then((json) => {
                     if (json.status == 401) {
                         alert('Anda tidak terautentikasi')
-                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                        window.location = 'http://127.0.0.1:8000/auth/login'
                     }
                     this.data = json.data
                 })
