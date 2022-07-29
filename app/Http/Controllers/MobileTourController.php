@@ -47,6 +47,8 @@ class MobileTourController extends Controller
         try {
             $tour = Tour::find($id);
             if ($tour) {
+                $likes = Favourite::where('user_id', auth()->user()->id)->where('tour_id', $tour->id)->first();
+                $tour['like'] = ($likes) ? true : false;
                 return response()->json([
                     'status' => 200,
                     'info' => 'Data Created Successfully',

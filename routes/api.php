@@ -6,6 +6,7 @@ use App\Http\Controllers\MobileTourController;
 use App\Http\Controllers\MobileUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BulkController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\TourController;
@@ -47,5 +48,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('admin', AdminController::class)->except(['create', 'edit']);
     Route::resource('category', CategoryController::class)->except(['create', 'edit']);
     Route::resource('tour', TourController::class)->except(['create', 'edit']);
+
+    // Bulk delete
+    Route::post('bulk-admin', [BulkController::class, 'admin']);
+    Route::post('bulk-user', [BulkController::class, 'user']);
+    Route::post('bulk-category', [BulkController::class, 'category']);
+    Route::post('bulk-tour', [BulkController::class, 'tour']);
+
     Route::post('auth-admin-logout', [AuthController::class, 'authAdminLoout']);
 });
