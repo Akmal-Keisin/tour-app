@@ -1,4 +1,4 @@
-<nav class="sidebar">
+<nav class="sidebar close">
     <header>
         <div class="image-text">
             <span class="image">
@@ -103,17 +103,17 @@
                     }
 
                     // create new data
-                    this.newData = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/auth-logout-admin', requestOption)
+                    this.newData = fetch('http://127.0.0.1:8000/api/auth-logout-admin', requestOption)
                     .then((response) => {
                         return response.json()
                     })
                     .then((json) => {
                     if (json.status == 401) {
                         alert('Anda tidak terautentikasi')
-                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                        window.location = 'http://127.0.0.1:8000/auth/login'
                     }
                     localStorage.removeItem('token')
-                    window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                    window.location = 'http://127.0.0.1:8000/auth/login'
                     return alert('Anda berhasil logout')
                     })
                 }

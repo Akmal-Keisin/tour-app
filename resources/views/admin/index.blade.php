@@ -1,6 +1,12 @@
 @extends('layouts.template')
 @section('content')
-
+<div class="lds-facebook d-none" id="loader">
+    <div class="cover">
+        <div class="load-item"></div>
+        <div class="load-item"></div>
+        <div class="load-item"></div>
+    </div>
+</div>
     <div id="app">
         <div class="box mx-4 my-3">
             <div class="box-head d-flex justify-content-between py-1">
@@ -200,6 +206,7 @@
                     this.detailData = this.data[index]
                 },
                 addData() {
+                    document.getElementById('loader').classList.remove('d-none')
                     // save form data to variable
                     let formData = new FormData(addForm)
 
@@ -217,20 +224,23 @@
                     }
 
                     // create new data
-                    this.newData = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/admin', requestOption)
+                    this.newData = fetch('http://127.0.0.1:8000/api/admin', requestOption)
                     .then((response) => {
                         return response.json()
                     })
                     .then((json) => {
                     if (json.status == 401) {
+                        document.getElementById('loader').classList.add('d-none')
                         alert('Anda tidak terautentikasi')
-                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                        window.location = 'http://127.0.0.1:8000/auth/login'
                     }
                     if (json.info == "Validation Error") {
                         // send validation data
+                        document.getElementById('loader').classList.add('d-none')
                         this.validationMsg = json.data
                         return
                     }
+                    document.getElementById('loader').classList.add('d-none')
                     this.data.push(json.data)
                     var myModalEl = document.getElementById('showAdd');
                     var modal = bootstrap.Modal.getInstance(myModalEl)
@@ -242,6 +252,7 @@
                     })
                 },
                 editData(itemData) {
+                    document.getElementById('loader').classList.remove('d-none')
                     let formData = new FormData(document.getElementById('editForm'))
                     // let formData = new FormData(editForm)
                     var myHeaders = new Headers();
@@ -254,22 +265,25 @@
                         headers: myHeaders,
                         body: formData
                     }
-                    this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/admin/${formData.get('id')}`, requestOption)
+                    this.newData = fetch(`http://127.0.0.1:8000/api/admin/${formData.get('id')}`, requestOption)
                     .then((response) => {
                         // convert response
                         return response.json()
                     })
                     .then((json) => {
                         if (json.status == 401) {
+                            document.getElementById('loader').classList.add('d-none')
                             alert('Anda tidak terautentikasi')
-                            window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                            window.location = 'http://127.0.0.1:8000/auth/login'
                         }
                         if (json.info == "Validation Error") {
+                            document.getElementById('loader').classList.add('d-none')
                             // send validation data
                             this.validationMsg = json.data
                             return
                         }
 
+                        document.getElementById('loader').classList.add('d-none')
                         // find data from list data and update
                         const index = this.data.findIndex(item => item.id == itemData.id)
                         this.data[index] = json.data
@@ -285,6 +299,7 @@
 
                     })
                     .catch((err) => {
+                        document.getElementById('loader').classList.add('d-none')
                         alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                         console.log(err)
                     })
@@ -292,6 +307,7 @@
                 deleteData(itemData) {
                     let check = confirm('Are You Sure?')
                     if (check) {
+                        document.getElementById('loader').classList.remove('d-none')
                         let formData = new FormData(document.getElementById('deleteForm'))
                         var myHeaders = new Headers();
                         myHeaders.append("Accept", "application/json");
@@ -303,24 +319,28 @@
                             headers: myHeaders,
                             body: formData
                         }
-                        this.newData = fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/admin/${itemData.id}`, requestOption)
+                        this.newData = fetch(`http://127.0.0.1:8000/api/admin/${itemData.id}`, requestOption)
                         .then((response) => {
                             // convert response
                             return response.json()
                         })
                         .then((json) => {
                             if (json.status == 401) {
+                                document.getElementById('loader').classList.add('d-none')
                                 alert('Anda tidak terautentikasi')
-                                window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                                window.location = 'http://127.0.0.1:8000/auth/login'
                             }
                             if (json.info == "Data Not Found") {
+                                document.getElementById('loader').classList.add('d-none')
                                 // send validation data
                                 return alert('Data Not Found')
                             }
+                            document.getElementById('loader').classList.add('d-none')
                             this.data = this.data.filter((t) => t !== itemData)
                             alert('Data Berhasil Dihapus')
                         })
                         .catch((err) => {
+                            document.getElementById('loader').classList.add('d-none')
                             alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                             console.log(err)
                         })
@@ -329,7 +349,8 @@
                 }
             },
             beforeMount() {
-                this.data = fetch('https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/admin', {
+                document.getElementById('loader').classList.remove('d-none')
+                this.data = fetch('http://127.0.0.1:8000/api/admin', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'Application/json',
@@ -341,13 +362,16 @@
                 })
                 .then((json) => {
                     if (json.status == 401) {
+                        document.getElementById('loader').classList.add('d-none')
                         alert('Anda tidak terautentikasi')
-                        window.location = 'https://magang.crocodic.net/ki/kelompok_3/tour-app/public/auth/login'
+                        window.location = 'http://127.0.0.1:8000/auth/login'
                     }
+                    document.getElementById('loader').classList.add('d-none')
                     console.log(json)
                     this.data = json.data
                 })
                 .catch((error) => {
+                    document.getElementById('loader').classList.add('d-none')
                     alert('Ups, ada kesalahan sistem. Kami akan memperbaikinya secepat mungkin')
                     console.log('Error', error)
                 })

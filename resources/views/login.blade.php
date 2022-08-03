@@ -9,12 +9,21 @@
 
 
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+    <link rel="stylesheet" href="">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
     <script src="https://unpkg.com/vue@3"></script>
     <title>Login</title>
 </head>
 <body>
+    <div class="lds-facebook d-none" id="loader">
+        <div class="cover">
+            <div class="load-item"></div>
+            <div class="load-item"></div>
+            <div class="load-item"></div>
+        </div>
+    </div>
     <div class="container" id="app">
         <div class="row justify-content-center">
           <div class="col-sm-6">
@@ -61,6 +70,8 @@
         },
         methods: {
             login() {
+                document.getElementById('loader').classList.remove('d-none')
+
                 let formData = new FormData(document.getElementById('loginForm'))
                 var myHeaders = new Headers();
                 myHeaders.append("Accept", "application/json");
@@ -72,7 +83,7 @@
                     body: formData
                 }
                 console.log(formData.get('email'))
-                fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/auth-admin`, requestOption)
+                fetch(`http://127.0.0.1:8000/api/auth-admin`, requestOption)
                 .then((response) => {
                     // convert response
                     return response.json()
@@ -81,15 +92,18 @@
                     if (json.info == "Login Failed") {
                         // send validation data
                         this.msg = json.data
+                        document.getElementById('loader').classList.add('d-none')
                         return
                     } else if (json.info == "Validation Error") {
+                        document.getElementById('loader').classList.add('d-none')
                         this.validationMsg = json.data
                         return
                     }
                     this.validationMsg = {}
                     document.getElementById('loginForm').reset()
                     localStorage.setItem('token', json.token)
-                    window.location = "https://magang.crocodic.net/ki/kelompok_3/tour-app/public/admin"
+                    document.getElementById('loader').classList.add('d-none')
+                    window.location = "http://127.0.0.1:8000/admin"
 
                 })
                 .catch((err) => {
