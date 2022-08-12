@@ -83,7 +83,7 @@
                     body: formData
                 }
                 console.log(formData.get('email'))
-                fetch(`http://127.0.0.1:8000/api/auth-admin`, requestOption)
+                fetch(`https://magang.crocodic.net/ki/kelompok_3/tour-app/public/api/auth-admin`, requestOption)
                 .then((response) => {
                     // convert response
                     return response.json()
@@ -103,7 +103,7 @@
                     document.getElementById('loginForm').reset()
                     localStorage.setItem('token', json.token)
                     document.getElementById('loader').classList.add('d-none')
-                    window.location = "http://127.0.0.1:8000/admin"
+                    window.location = "https://magang.crocodic.net/ki/kelompok_3/tour-app/public/admin"
 
                 })
                 .catch((err) => {

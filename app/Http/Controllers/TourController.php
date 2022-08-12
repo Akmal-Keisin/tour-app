@@ -22,7 +22,6 @@ class TourController extends Controller
     public function index()
     {
         try {
-
             if (request('search')) {
                 $tours = Tour::where('name', 'Like', '%' . request('search') . '%');
                 return response()->json([
