@@ -176,7 +176,7 @@ class TourController extends Controller
                     Storage::delete('image/' . $image[1]);
                     $tour->image = $request->image;
                 } else {
-                    $tour->image = $request->image;
+                    $tour->image = env('APP_URL') . '/' . $request->file('image')->store('image');
                 }
 
                 $tour->information = $request->information;
