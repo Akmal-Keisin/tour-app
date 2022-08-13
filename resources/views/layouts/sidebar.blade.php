@@ -16,12 +16,12 @@
 
     <div class="menu-bar">
         <div class="menu">
-            <li class="search-box">
+            {{-- <li class="search-box">
                 <i class='bx bx-search icon'></i>
                 <form action="">
                     <input type="text" name="search" placeholder="Search..." id="searchBox">
                 </form>
-            </li>
+            </li> --}}
 
             <ul class="menu-links m-0 p-0">
                 <li class="nav-link {{ Request::is('admin*') ? 'link-active' : '' }}">
